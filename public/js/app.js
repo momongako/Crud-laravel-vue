@@ -51374,17 +51374,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('create-component', __webpack_require__(/*! ./components/CreateComponent.vue */ "./resources/js/components/CreateComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
-
-// import VueRouter from 'vue-router';
-// import { routes } from './routes';
-
-// Vue.use(VueRouter);
-// const router = new VueRouter({
-//     mode: 'history',
-//     routes: routes
-// });
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  // router: router,
   el: '#app'
 });
 
