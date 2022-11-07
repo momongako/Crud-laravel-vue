@@ -1,7 +1,11 @@
 <template>
 
     <div class="row">
-
+        <div class="input-group">
+            <div class="form-outline">
+                <input type="search" id="form1" class="form-control" />
+            </div>
+        </div>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Create Student</div>
@@ -61,11 +65,19 @@
                             </tr>
                         </tbody>
                     </table>
-                    <pagination :data="students" @pagination-change-page="getResults"></pagination>
+
+                    <!-- <pagination :data="students" @pagination-change-page="getResults"></pagination> -->
+
+
+                    <pagination v-bind:pagination="pagination" v-on:click.native="getResults(pagination.current_page)"
+                        :offset="4"></pagination>
+                    <label for="cars">table list :</label>
+
+
                 </div>
             </div>
         </div>
-
+        <!-- model -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -105,6 +117,7 @@
                 </div>
             </div>
         </div>
+        {{ test }}
     </div>
 
 
@@ -112,16 +125,19 @@
 
 <script>
 import axios from 'axios';
+import Pagination from './Pagination.vue';
 
 
 
 
 export default {
-
-
-
+    components: { Pagination },
+    props: {
+        test: ''
+    },
     data() {
         return {
+            SearchStudent: "",
             students: {},
             id: '',
             name: '',
@@ -129,12 +145,21 @@ export default {
             phone: '',
             editname: '',
             editemail: '',
-            editphone: ''
+            editphone: '',
+            pagination: {
+                total: 0,
+                per_page: 2,
+                from: 1,
+                to: 0,
+                current_page: 1
+            },
+            offset: 4,
         };
     },
 
     mounted() {
-        this.getResults();
+        this.getResults(this.pagination.current_page);
+        // console.log({asset('all_students?page=')});
     },
 
     methods: {
@@ -152,12 +177,14 @@ export default {
                     this.getResults();
                 });
         },
-
-        getResults(page = 1) {
+        //get list
+        getResults(page) {
             axios.get('all_students?page=' + page)
                 .then(response => {
-                    console.log(response.data);
-                    this.students = response.data;
+
+                    this.students = response.data.data;
+                    this.pagination = response.data.data;
+                    console.log('>> paginate', response.data.data.data.splice(0, 6))
                 });
         },
         editStudents(id) {
@@ -189,8 +216,10 @@ export default {
                 .then(response => {
                     this.getResults();
                 })
-        }
+        },
+
     },
+
 };
 </script>
 

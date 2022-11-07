@@ -14,7 +14,8 @@
                     </div>
                     @endif
 
-                    <create-component></create-component>
+                    <!-- <create-component></create-component> -->
+                    <App />
                 </div>
             </div>
         </div>
